@@ -10,7 +10,7 @@ C1541 ?= c1541
 
 CC      = cl65
 CFLAGS  = -t $(CC65_TARGET) --create-dep $(<:.c=.d) -Ors --codesize 500 -T -g
-LDFLAGS = -t $(CC65_TARGET) -m $(PROGRAM).map
+LDFLAGS = -t $(CC65_TARGET) -Ln labels -m $(PROGRAM).map
 
 ifneq ($(shell echo),)
   CMD_EXE = 1
@@ -29,7 +29,7 @@ endif
 .SUFFIXES:
 .PHONY: all mostlyclean clean disk run
 
-all:
+all: compile disk
 
 compile: $(PROGRAM)
 
@@ -55,3 +55,6 @@ disk: compile
 
 run: compile disk
 	@$(X64) $(PROGRAM).d64
+
+debug: compile disk
+	@$(X64) -moncommands labels -8 $(PROGRAM).d64
