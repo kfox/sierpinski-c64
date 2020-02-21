@@ -5,7 +5,7 @@ PROGRAM = sierpinski
 CC65_TARGET = c64
 
 # provided by the VICE emulator
-X64   ?= x64
+X64   ?= x64sc
 C1541 ?= c1541
 
 CC      = cl65
